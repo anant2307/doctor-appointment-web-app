@@ -1,0 +1,94 @@
+<!DOCTYPE html> 
+<html>
+<head> 
+	<title>doctors list</title>
+	<meta charset="utf-8">
+<link rel="stylesheet" href="/css/style2.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <style>
+
+  	
+  	*{
+  		margin:0; padding:0; font-family: 'Josefin Sans', sans-serif;
+  	}
+ </style>
+
+</head>
+<body>
+  <% include header.ejs%>
+
+
+<section>
+<div class="container">
+  <form action="/meet/list/<%=user.id%>" method="GET">
+    <h3 class="mt-2 mb-2">Location</h3>
+    <div class="row">
+        
+    <div class="col-md-6 col-md-2">
+        
+        <select class="form-control mr-2" id="category_id" name="city" required>
+          <% if(typeof city== "undefined") {%>
+            <option selected value="">select an option</option>
+            <%} else {%>
+              <option selected value=""><%=city %></option>
+              
+              <%}%>
+            <option value="kochi">kochi</option>
+            <option value="Palakkad">Palakkad</option>
+            <option value="Thrissur">thrissur</option>
+            <option value="Kannur">kannur</option>
+            <option value="Kottayam">kottyam</option>
+            <option value="Trivandrum">trivendram</option>
+            <option value="Wayand">wayand</option>
+            <option value="Kozhikode">kozhikode</option>
+            <option value="Kasargod">kasargod</option>
+      </select>
+      
+    </div>
+    <div class="col-md-6 col-md-2">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+    </div>
+  </form>
+  <h1 class="text-center text-capitalize pt-5"><strong>Doctors</strong></h1>
+  <hr>
+    <div class="row text-center mb-5">
+    <% if(doctor.length > 0) {%>
+    <% doctor.forEach((value,index)=> {%>
+      <div class="col-lg-3 col-md-3 col-12">
+          <div >
+            <img class="card-img-top" src="/image/upload/<%=value.picid %>" style="width:250px;height: 200px;" alt="Card image">
+            <div class="card-body">
+              
+              <h4 class="card-title"><%=value.specialization %></h4>
+              <h6 class="card-text"><%=value.location%></h4>
+              <h6 class="card-title"><%=value.doctorname %></h4>
+              <div class="container text-center">
+                <a href="/meet/appointment/<%=value.doctorid%>" class="btn btn-danger" class="btn btn-danger" role="button">Get Appointment</a>
+              </div>
+            </div>
+          </div>
+      </div>
+      <%})%>
+      <%} else {%>
+        <div class="box">
+          <h3>No doctor is in your city</h3>
+        </div>
+        <%}%>
+      </div>
+</section>
+
+
+<% include footer.ejs %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
